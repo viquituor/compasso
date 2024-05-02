@@ -10,12 +10,13 @@ O desafio está presente em cada sprint ao longo do estágio. Utilize o diretór
 
 
 1. ...
-[Etapa I](etapa-1/entrega.txt)
+[Etapa I](etapa.1_criar_arquivo_executavel)
 
 
 2. ...
-[Etapa II](etapa-2/entrega.txt)
+[Etapa II](etapa.2_agendar_a_execução_do_processamento)
 
 
-
+2. ...
+[Etapa III](etapa.3_criar_novo_relatorio)
 
