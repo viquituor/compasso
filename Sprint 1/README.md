@@ -12,7 +12,7 @@ Utilize o arquivo README.md da Sprint para organizar todas as suas entregas. Fa√
 
 # DESAFIO
 
-[DESAFIO](Desafio\README.md)
+[DESAFIO](Desafio/README.md)
 
 # Exerc√≠cios
 
