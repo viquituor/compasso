@@ -10,5 +10,4 @@ em seguida e feito o arquivo relatorio.txt contendo todo as informações pedida
         quantidade de produtos vendidos
         e as 10 primeras linhas dos arquivos de dados de vendas 
 
-        depois disso o arquivo de dados de vendas com a data do dia e compactado 
-        e exluido todos os arquivos de dados de vendas do backup e do diretorio vendas
+depois disso o arquivo de dados de vendas com a data do dia e compactado e exluido todos os arquivos de dados de vendas do backup e do diretorio vendas
