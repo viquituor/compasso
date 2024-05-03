@@ -10,7 +10,7 @@ O desafio está presente em cada sprint ao longo do estágio. Utilize o diretór
 
 
 1. ...
-[Etapa I](.1_criar_arquivo_executavel\README.md)
+[Etapa I](etapa.1_criar_arquivo_executavel\README.md)
 
 
 2. ...
