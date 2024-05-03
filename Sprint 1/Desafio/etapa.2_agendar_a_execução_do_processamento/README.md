@@ -1,2 +1,0 @@
-## nessa etapa foi o agendamento foi feito pelo crontab um aplicativo que ira executar o arquivo na hora pedida nos dias pedidos
----

@@ -10,6 +10,9 @@ Neste arquivo você irá apresentar suas entregas da Sprint corrente. Observe qu
 
 Utilize o arquivo README.md da Sprint para organizar todas as suas entregas. Faça referência aos arquivos de código-fonte. Evite colocar código diretamente no Markdown pois dificulta nossa avaliação.
 
+# DESAFIO
+
+[DESAFIO](Desafio\README.md)
 
 # Exercícios
 
