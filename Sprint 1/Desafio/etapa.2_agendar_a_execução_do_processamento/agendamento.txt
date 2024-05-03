@@ -2,6 +2,6 @@
 
 crontab -e
 
-Adicione a seguinte linha ao final do arquivo:
+Adicionado a seguinte linha ao final do arquivo:
 
 27 15 * * 1-4 /home/ecommerce/processamento_de_vendas.sh
