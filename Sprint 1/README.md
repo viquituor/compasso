@@ -27,20 +27,5 @@ Utilize o arquivo README.md da Sprint para organizar todas as suas entregas. Fa�
 
 
 
-# Evidências
-
-
-Ao executar o código do exercício ... observei que ... conforme podemos ver na imagem a seguir:
-
-
-![Evidencia 1](evidencias/sample.webp)
-
-
-
-# Certificados
-
-
-- Certificado do Curso ABC
-![Curso ABC](certificados/sample.png)
 
 
