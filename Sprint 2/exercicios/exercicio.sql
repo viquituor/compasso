@@ -1,23 +1,39 @@
--- EXERCÍCIOS ######################################################################
+--PRIMEIROA EXERCICIOS 
+--caso de estudo BIBLIOTECA
+--E01
 
--- (Exercício 1) Selecione os nomes de cidade distintas que existem no estado de
--- Minas Gerais em ordem alfabética (dados da tabela sales.customers)
+SELECT  * 
+from livro
+where publicacao >= '2015/01/01'
+order by cod desc
+--E02
 
-select distinct city
-from sales.customers
-order by city
-
--- (Exercício 2) Selecione o visit_id das 10 compras mais recentes efetuadas
--- (dados da tabela sales.funnel)
-
-select visit_id
-from sales.funnel
+SELECT titulo, valor 
+from livro
+order by valor DESC 
 limit 10
 
--- (Exercício 3) Selecione todos os dados dos 10 clientes com maior score nascidos
--- após 01/01/2000 (dados da tabela sales.customers)
+--E03
 
-select *
-from sales.customers
-order by score desc
-limit 10
+SELECT COUNT(livro.cod) AS quantidade, editora.nome AS nome,  endereco.estado, endereco.cidade 
+FROM livro
+JOIN editora ON livro.editora = codeditora
+JOIN endereco on editora.endereco = codendereco
+GROUP BY editora.nome;
+
+--E04
+--E05
+
+SELECT autor.nome
+FROM livro
+JOIN autor ON livro.autor = codautor
+join editora on livro.editora = codeditora
+join endereco on editora.endereco = codendereco
+WHERE estado <> 'PARANÁ' AND estado <> 'SANTA CATARINA' AND estado <> 'RIO GRANDE DO SUL'
+GROUP BY autor.nome 
+ORDER by autor.nome asc
+--E06
+--E07
+--E08
+--E09 
+--E10
