@@ -6,7 +6,7 @@ Estou mergulhado nesta jornada de aprendizado que mescla teoria e prática, expl
 ## Sprints
 
 1. [Sprint 1](Sprint%201/README.md)
-
+1. [Sprint 2](Sprint%202/README.md)
 ___
 
 
