@@ -1,1 +1,1 @@
-[mapeamento_relacional](Desafio/mapeamento relacional.jpeg)
+[mapeamento_relacional](/Sprint%202/Desafio/mapeamento%20relacional.jpeg)
