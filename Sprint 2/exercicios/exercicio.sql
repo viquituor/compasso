@@ -89,6 +89,16 @@ GROUP by cdpro))
 
 --E10
 
+SELECT 
+    tbvendedor.nmvdd AS vendedor,
+    SUM(qtd * vrunt) as valor_total_vendas,
+    ROUND((SUM(qtd* vrunt) * tbvendedor.perccomissao/100),2) AS comissao
+FROM tbvendas 
+INNER JOIN tbvendedor ON tbvendedor.cdvdd  = tbvendas.cdvdd
+WHERE status = 'Concluído'
+GROUP BY tbvendedor.nmvdd 
+ORDER BY comissao desc
+
 --E11
 
 SELECT cdcli, nmcli,sum(qtd* vrunt) as gasto
