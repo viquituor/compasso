@@ -40,17 +40,17 @@ SELECT DISTINCT
      
 
 
-CREATE VIEW  dim_LOCACAO AS
+CREATE VIEW fact_LOCACAO AS
 SELECT DISTINCT 
+    idLocacao AS idLocacao,
     horaEntrega AS horaEntrega,
     dataEntrega AS dataEntrega,
     vlrDiaria AS vlrDiaria,
     qtdDiaria AS qtdDiaria,
     dataLocacao AS dataLocacao,
     horaLocacao AS horaLocacao,
-    LOCACAO.idCliente AS idCliente,
+    idCliente AS idCliente,
     idCarro AS idCarro,
-    idVendedor AS idVendedor,
-    idLocacao AS idLocacao 
-    FROM LOCACAO 
+    idVendedor AS idVendedor
+FROM LOCACAO;
    
