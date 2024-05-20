@@ -12,3 +12,5 @@ mapeamento relacional do banco de dados ja com as formas normais
 # [Etapa II - DIMENSIONAMENTO](/Sprint%202/Desafio/dimensional/)
 ### nessa etapa cada tabela foi gerada um dimensionamento para melhor analise 
 
+[mapeamento_dimensional](/Sprint%202/Desafio/dimensional/concessionaria.sqlite.png)
+
