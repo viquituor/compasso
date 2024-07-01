@@ -6,3 +6,7 @@
 # Exercícios
 
 [RESPOSTA DO EXERCICIO](/Sprint%203/Exercicio/actors.py)
+
+# CERTIFICADOS
+
+[certificados](/Sprint%203/certificados)
