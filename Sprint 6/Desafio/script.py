@@ -62,3 +62,10 @@ print(f"Arquivo movies.csv carregado com sucesso para {bucket_name}/{movies_file
 print(f"Carregando arquivo series.csv para {bucket_name}/{series_file_key}...")
 upload_to_s3(series_df, bucket_name, series_file_key)
 print(f"Arquivo series.csv carregado com sucesso para {bucket_name}/{series_file_key}.")
+
+# COMANDOS USADOS PARA CONSTRUÇÃO DA IMAGEM DOCKER E PARA A EXEUÇÃO:
+
+# docker build -t ingest-data .  
+
+#docker run --rm -v "C:\Users\User\OneDrive\Área de Trabalho\trainee-repo-template\Sprint 6\Desafio:/app/data" ingest-data
+
