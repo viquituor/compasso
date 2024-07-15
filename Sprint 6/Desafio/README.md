@@ -2,8 +2,8 @@
 
 ## Consultas em Forma de Pergunta
 
-1. **Quantos filmes do gênero 'Fantasy' estão presentes no arquivo `movies.csv`?**
-2. **Quantas séries de TV do gênero 'Sci-Fi' estão presentes no arquivo `series.csv`?**
+1. **Quais os filmes de fantasia mais longos e piores avaliados?**
+2. **Que ano foram lançados as 10 series de Sci-fi mas bem avaliadas?**
 
 ---
 
