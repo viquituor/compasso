@@ -193,13 +193,13 @@ if __name__ == "__main__":
 
 2.1 Upload do código Python para uma função Lambda no console AWS. 
 
-![ADICIONADO SCRIPT NO LAMBDA](Sprint%207/Desafio/Evidencias/lambda.jpeg)
+![ADICIONADO SCRIPT NO LAMBDA](/Sprint%207/Desafio/Evidencias/lambda.jpeg)
 
 2.2 Configurado uma trigger (gatilho) no Lambda para executar periodicamente usando o CloudWatch Events ou Amazon EventBridge. Criado uma nova regra para agendar a execução.
 
-![CRIAÇÃO DE CRONOGRAMA DE EXECUÇÃO DO LAMBDA](Sprint%207/Desafio/Evidencias/evet.jpeg)
+![CRIAÇÃO DE CRONOGRAMA DE EXECUÇÃO DO LAMBDA](/Sprint%207/Desafio/Evidencias/evet.jpeg)
 
 2.3 Evidências da Criação dos Arquivos
 Verifique os arquivos JSON criados e enviados para o bucket S3. Assegure-se de que os arquivos estão no caminho especificado e no formato correto.
 
- ![EVIDENCIAS DA CRIAÇÃO DOS ARQUIVOS](Sprint%207/Desafio/Evidencias/bucket.jpeg)
+ ![EVIDENCIAS DA CRIAÇÃO DOS ARQUIVOS](/Sprint%207/Desafio/Evidencias/bucket.jpeg)
