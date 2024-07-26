@@ -20,6 +20,8 @@ from datetime import datetime
 from botocore.exceptions import NoCredentialsError
 from tmdbv3api import TMDb, Movie, TV
 
+```
+
 ### tempfile
 
 foi utilizado para criar arquivos temporarios como o csv para ser transcrito para json
@@ -44,6 +46,7 @@ foi utilizado para consutar os dados de filmes e series
 
 Para concluir o desafio foi necessario que os dados da consulta da API fossem salvos em um arquivo temporario csv e depois transformdo para um aquivo json, pois foi a unica forma que consegui de salvar os dados em json
 
+```python
 import csv
 import json
 import os
@@ -188,6 +191,7 @@ def main():
 if __name__ == "__main__":
     main()
 
+```
 
 ### 2. Incerção no AWS S3 bucket pelo Lambda
 
@@ -202,4 +206,4 @@ if __name__ == "__main__":
 2.3 Evidências da Criação dos Arquivos
 Verifique os arquivos JSON criados e enviados para o bucket S3. Assegure-se de que os arquivos estão no caminho especificado e no formato correto.
 
- ![EVIDENCIAS DA CRIAÇÃO DOS ARQUIVOS](/Sprint%207/Desafio/Evidencias/bucket.jpeg)
+[EVIDENCIAS DA CRIAÇÃO DOS ARQUIVOS](/Sprint%207/Desafio/Evidencias/bucket.jpeg)
