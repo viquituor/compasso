@@ -4,11 +4,11 @@
 
 O objetivo é praticar a combinação de conhecimentos vistos no Programa, fazendo um mix de tudo que já foi dito.
 
-### 1. Entrega 2: Ingestão de API
+## 1. Entrega 2: Ingestão de API
 
 Nesta etapa do desafio iremos capturar dados do TMDB via AWS Lambda realizando chamadas de API. Os dados coletados devem ser persistidos em Amazon S3, camada RAW Zone.
 
-## 1.1 Abaixo segue as importações e suas ações dentro do script
+### 1.1 Abaixo segue as importações e suas ações dentro do script
 
 ```python
 import csv
@@ -40,7 +40,7 @@ foi utilizado para indentificar certos erros da certificação da aws
 
 foi utilizado para consutar os dados de filmes e series
 
-## 1.1 Salvamento em csv e tranformação para json
+## 1.2 Salvamento em csv e tranformação para json
 
 Para concluir o desafio foi necessario que os dados da consulta da API fossem salvos em um arquivo temporario csv e depois transformdo para um aquivo json, pois foi a unica forma que consegui de salvar os dados em json
 
@@ -189,7 +189,7 @@ if __name__ == "__main__":
     main()
 
 
-### 2. incerção no AWS S3 bucket pelo Lambda
+### 2. Incerção no AWS S3 bucket pelo Lambda
 
 2.1 Upload do código Python para uma função Lambda no console AWS. 
 
