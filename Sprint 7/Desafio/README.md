@@ -195,7 +195,7 @@ if __name__ == "__main__":
 
 ### 2. Incerção no AWS S3 bucket pelo Lambda
 
-2.1 Upload do código Python para uma função Lambda no console AWS. 
+2.1 Upload do código Python para uma função Lambda no console AWS.
 
 ![ADICIONADO SCRIPT NO LAMBDA](/Sprint%207/Desafio/Evidencias/lambda.jpeg)
 
@@ -206,4 +206,4 @@ if __name__ == "__main__":
 2.3 Evidências da Criação dos Arquivos
 Verifique os arquivos JSON criados e enviados para o bucket S3. Assegure-se de que os arquivos estão no caminho especificado e no formato correto.
 
-[EVIDENCIAS DA CRIAÇÃO DOS ARQUIVOS](/Sprint%207/Desafio/Evidencias/bucket.jpeg)
+![EVIDENCIAS DA CRIAÇÃO DOS ARQUIVOS](/Sprint%207/Desafio/Evidencias/bucket.jpeg)

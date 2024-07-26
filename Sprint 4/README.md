@@ -1,7 +1,7 @@
 
 # DESAFIO
 
-[DESAFIO](/Sprint%204/Desafio/)
+[DESAFIO](/Sprint%204/Desafio/README.md)
 
 # Certificados
 

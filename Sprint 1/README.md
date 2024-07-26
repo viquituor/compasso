@@ -17,7 +17,7 @@ Utilize o arquivo README.md da Sprint para organizar todas as suas entregas. Fa√
 # Exerc√≠cios
 
 1. ...
-[Resposta Ex1.](exercicios/ex1.txt)
+[Resposta Ex1.](exercicios/consolidador_de_processos_de_vendas.hs)
 
 2. ...
-[Resposta Ex2.](exercicios/ex2.txt)
+[Resposta Ex2.](exercicios/processamento_de_vendas.hs)
