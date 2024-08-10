@@ -24,25 +24,44 @@ pyspark
 
 ```sh
 wget README.md
-# Inicializar SparkContext
+```
+
+## Inicializar SparkContext
+
+```sh
 from pyspark import SparkContext, SparkConf
 
 conf = SparkConf().setAppName("WordCount")
 sc = SparkContext(conf=conf)
+```
 
-# Ler o arquivo README.md
+## Ler o arquivo README.md
+
+```sh
 text_file = sc.textFile("README.md")
+```
 
-# Dividir as linhas em palavras
+## Dividir as linhas em palavras
+
+```sh
 words = text_file.flatMap(lambda line: line.split(" "))
+```
 
-# Criar pares (palavra, 1)
+## Criar pares (palavra, 1)
+
+```sh
 word_pairs = words.map(lambda word: (word, 1))
+```
 
-# Contar as ocorrências de cada palavra
+## Contar as ocorrências de cada palavra
+
+```sh
 word_counts = word_pairs.reduceByKey(lambda a, b: a + b)
+```
 
-# Coletar e exibir os resultados
+## Coletar e exibir os resultados
+
+```sh
 for word, count in word_counts.collect():
     print(f"{word}: {count}")
 
