@@ -7,7 +7,7 @@ from awsglue.job import Job
 from awsglue.dynamicframe import DynamicFrame
 
 # Captura dos argumentos
-args = getResolvedOptions(sys.argv, ['JOB_NAME'])
+args = getResolvedOptions(sys.argv, ['JOB_NAME', 'MOVIES_INPUT_PATH', 'SERIES_INPUT_PATH', 'OUTPUT_PATH'])
 
 # Inicialização do contexto Spark e Glue
 sc = SparkContext()
@@ -16,78 +16,54 @@ spark = glueContext.spark_session
 job = Job(glueContext)
 job.init(args['JOB_NAME'], args)
 
-# Processamento dos arquivos JSON de filmes
+# Caminhos de entrada e saída
+movies_input_path = args['MOVIES_INPUT_PATH']
+series_input_path = args['SERIES_INPUT_PATH']
+output_path = args['OUTPUT_PATH']
 
-try:
-    # Leitura dos dados dos filmes do Glue Catalog
-    movies_dynamic_frame = glueContext.create_dynamic_frame.from_catalog(
-        database="db-json",
-        table_name="movies-json",
-        transformation_ctx="movies_dynamic_frame"
+# Função para processar JSON e salvar como Parquet
+def process_json_to_parquet(input_path, output_subfolder):
+    # Leitura do arquivo JSON como um DynamicFrame
+    dynamic_frame = glueContext.create_dynamic_frame.from_options(
+        connection_type="s3",
+        connection_options={"paths": [input_path]},
+        format="json"
     )
-    
-    # Converte para DataFrame do Spark para transformação
-    movies_df = movies_dynamic_frame.toDF()
+
+    # Converte o DynamicFrame para DataFrame para transformação
+    df = dynamic_frame.toDF()
 
     # Renomeia as colunas conforme necessário
-    movies_df = movies_df.withColumnRenamed("id", "id")
-    movies_df = movies_df.withColumnRenamed("title", "tituloPincipal")
-    movies_df = movies_df.withColumnRenamed("release_date", "anoLancamento")
-    movies_df = movies_df.withColumnRenamed("popularity", "popularidade")
-    movies_df = movies_df.withColumnRenamed("vote_average", "notaMedia")
-    movies_df = movies_df.withColumnRenamed("runtime", "tempoMinutos")
+    if 'title' in df.columns:
+        df = df.withColumnRenamed("id", "id")
+        df = df.withColumnRenamed("title", "tituloPincipal")
+        df = df.withColumnRenamed("release_date", "anoLancamento")
+        df = df.withColumnRenamed("popularity", "popularidade")
+        df = df.withColumnRenamed("vote_average", "notaMedia")
+        df = df.withColumnRenamed("runtime", "tempoMinutos")
+    elif 'name' in df.columns:
+        df = df.withColumnRenamed("id", "id")
+        df = df.withColumnRenamed("name", "tituloPincipal")
+        df = df.withColumnRenamed("first_air_date", "anoLancamento")
+        df = df.withColumnRenamed("popularity", "popularidade")
+        df = df.withColumnRenamed("vote_average", "notaMedia")
 
-    # Converte de volta para DynamicFrame para gravação
-    movies_dynamic_frame = DynamicFrame.fromDF(movies_df, glueContext, "movies_dynamic_frame")
-    
+    # Converte de volta para DynamicFrame
+    dynamic_frame = DynamicFrame.fromDF(df, glueContext, "dynamic_frame")
+
     # Gravação em Parquet na Trusted Zone
     glueContext.write_dynamic_frame.from_options(
-        frame=movies_dynamic_frame,
+        frame=dynamic_frame,
         connection_type="s3",
-        connection_options={
-            "path": "s3://projeto-pb/Trusted/json/movies/",
-            "partitionKeys": []  # Se não precisar de particionamento, deixe a lista vazia
-        },
+        connection_options={"path": f"{output_path}/{output_subfolder}/"},
         format="parquet"
     )
-except Exception as e:
-    print(f"Erro ao processar movies.json: {e}")
 
-# Processamento do JSON de séries
+# Processa o arquivo movies.json
+process_json_to_parquet(movies_input_path, "movies")
 
-try:
-    # Leitura dos dados das séries do Glue Catalog
-    series_dynamic_frame = glueContext.create_dynamic_frame.from_catalog(
-        database="db-json",
-        table_name="series-json",
-        transformation_ctx="series_dynamic_frame"
-    )
-    
-    # Converte para DataFrame do Spark para transformação
-    series_df = series_dynamic_frame.toDF()
-
-    # Renomeia as colunas conforme necessário
-    series_df = series_df.withColumnRenamed("id", "id")
-    series_df = series_df.withColumnRenamed("name", "tituloPincipal")
-    series_df = series_df.withColumnRenamed("first_air_date", "anoLancamento")
-    series_df = series_df.withColumnRenamed("popularity", "popularidade")
-    series_df = series_df.withColumnRenamed("vote_average", "notaMedia")
-
-    # Converte de volta para DynamicFrame para gravação
-    series_dynamic_frame = DynamicFrame.fromDF(series_df, glueContext, "series_dynamic_frame")
-    
-    # Gravação em Parquet na Trusted Zone
-    glueContext.write_dynamic_frame.from_options(
-        frame=series_dynamic_frame,
-        connection_type="s3",
-        connection_options={
-            "path": "s3://projeto-pb/Trusted/json/series/",
-            "partitionKeys": []  # Se não precisar de particionamento, deixe a lista vazia
-        },
-        format="parquet"
-    )
-except Exception as e:
-    print(f"Erro ao processar series.json: {e}")
+# Processa o arquivo series.json
+process_json_to_parquet(series_input_path, "series")
 
 # Finaliza o job
 job.commit()
