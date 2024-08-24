@@ -8,6 +8,7 @@
 
 ![JOBS](/Sprint%209/Desafio/Evidencias/JOBS-GLUE-STUDIO.png)
 [SCRIPT DO PROCESSAMENTO DOS ARQUIVOS LOCAIS](/Sprint%209/Desafio/Refined_local.py)
+|
 [SCRIPT DO PROCESSAMENTO DOS ARQUIVOS TMDB](/Sprint%209/Desafio/Refined_tmdb.py)
 
 ## CRIAÇAO DE BASE DE DADOS, TABELAS E COLUNAS
@@ -17,3 +18,7 @@
 ![COLUNAS DA TABELA LOCAL DE SERIES](/Sprint%209/Desafio/Evidencias/schemas-series-local.png)
 ![COLUNAS DA TABELA TMDB DE SERIES](/Sprint%209/Desafio/Evidencias/schemas.series-tmdb.png)
 ![COLUNAS DA TABELA TMDB DE FILMES](/Sprint%209/Desafio/Evidencias/schemas-movies-tmdb.png)
+
+## esquema conceitual da base de dados
+
+![esquema conceitual](/Sprint%209/Desafio/Evidencias/esquema-conceitual.png)
