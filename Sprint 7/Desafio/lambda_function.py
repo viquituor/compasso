@@ -11,8 +11,15 @@ from tmdbv3api import TMDb, Movie, TV
 tmdb = TMDb()
 tmdb.api_key = 'ce0842a8df0d5d21acf0a8ce237ca4d7'
 
+aws_access_key_id = 'ASIAZI2LF2WK2DIJX7A2'
+aws_secret_access_key = 'gigcizgchSSqeaU4toK2ya+44ISSVP4EvexfE0qq'
+aws_session_token = 'IQoJb3JpZ2luX2VjEKv//////////wEaCXVzLWVhc3QtMSJGMEQCIF32B6CfeIUQ8uhSX7CTmhJ9+qDirJIZ7cVSsK+tawC/AiA2jFeqz/otmcGHZo4QeHwu0ikisfL48xxGfa/h/RJfXyqoAwiz//////////8BEAAaDDYzNzQyMzQ0MTMwMSIMqWTPqHVqvzruYfQkKvwCeGnySlqZ+n9IMa0YwnZjhJlz1bjcRgxK7dgJxRnddVXchQKL49sN+yipa7cvRPsHLKiTJ4UHOiEvFzfqbzCkpdr20+Tl6V0ivNI6E/eA6iw9YWUfQLV9JUEqOHLTdoYIRHcPuzObBhyHzDn0s7ieDL1Q2tuA65WH0WiJc/gilR/osAfZYZxHyFzouR8vzUAhbEUHiY3sGVl6aRkKPdQDU971Tvn4FDa1eEHDcyhcoG2W4zKJitQ6btaAYvhkk3feuEFYbXIw3Fx9CdrEGI5wHqXlVchf8WGNkyx/RnoMdBAYqTmOgKfxjAg7ZKlpaaoNWce5t3jko17oPQEHGgYcWAuckjJoaw/2l674VTALy12/xNB9TI1j6f9ceQQFSwE1nky++zeueJku5CSqD/CV02VBFh6pjFBWc3vedNiB8NvkV762BsUn+SXVha7pZ7K0XGqZWOkqg797NIiszuzwWIxxKdGcyMqliIly1PUzNyn0gQAEm9eB4LvW9KcwjoWltgY6pwGdYL9OqTpfp72+Agm0FhS+yfuGANDtORuAfKWudcyadIjz9fOMjhxP0jisVssM+U8dUR8qbFsILvy5/5HeKUQT3aMgXNWKAYJnrPge8Z1tRGi5ZlRxKWtf1P0su05CRGjQkcK4nFUJCsmM899nQfOzK9/jgfbcpHJBomUwIHsEPu49s9MuHg216ck/rNB3L05UapfvIqLXj1ExS1sV1AIqB5a5hklv8g=='
+
 # Inicialize o boto3 para S3
-s3 = boto3.client('s3')
+s3 = boto3.client('s3',
+    aws_access_key_id=aws_access_key_id,
+    aws_secret_access_key=aws_secret_access_key,
+    aws_session_token=aws_session_token)
 bucket_name = 'projeto-pb'
 
 # Obter a data atual
@@ -24,7 +31,7 @@ def fetch_fantasy_movies():
     page = 1
     all_fantasy_movies = []
 
-    while page <= 5:  # Limita a 5 páginas para simplificação
+    while page <= 50:  # Limita a 5 páginas para simplificação
         try:
             response = movie.popular(page=page)
             filtered_movies = [m for m in response.get('results', []) if genre_id in m.get('genre_ids', [])]
@@ -37,8 +44,8 @@ def fetch_fantasy_movies():
     # Ordenar por duração (mais longos) e avaliação (piores)
     all_fantasy_movies.sort(key=lambda x: (x.get('runtime', 0), -x.get('vote_average', 0)))
 
-    # Pegar os 10 primeiros
-    longest_worst_rated_fantasy_movies = all_fantasy_movies[:30]
+    # Pegar os 200 primeiros
+    longest_worst_rated_fantasy_movies = all_fantasy_movies[:200]
     
     # Simplificar dados para CSV
     simplified_movies = [
@@ -48,7 +55,8 @@ def fetch_fantasy_movies():
             'release_date': movie.get('release_date'),
             'popularity': movie.get('popularity'),
             'vote_average': movie.get('vote_average'),
-            'runtime': movie.get('runtime')
+            'runtime': movie.get('runtime'),
+            'idioma': movie.get('original_language')
         }
         for movie in longest_worst_rated_fantasy_movies
     ]
@@ -61,7 +69,7 @@ def fetch_top_sci_fi_series():
     page = 1
     all_sci_fi_series = []
 
-    while page <= 5:  # Limita a 5 páginas para simplificação
+    while page <= 50:  # Limita a 5 páginas para simplificação
         try:
             response = tv.popular(page=page)
             filtered_series = [s for s in response.get('results', []) if genre_id in s.get('genre_ids', [])]
@@ -74,8 +82,8 @@ def fetch_top_sci_fi_series():
     # Ordenar por avaliação (mais bem avaliadas)
     all_sci_fi_series.sort(key=lambda x: -x.get('vote_average', 0))
 
-    # Pegar as 10 séries mais bem avaliadas
-    top_sci_fi_series = all_sci_fi_series[:30]
+    # Pegar as 200 séries mais bem avaliadas
+    top_sci_fi_series = all_sci_fi_series[:200]
     
     # Simplificar dados para CSV
     simplified_series = [
@@ -84,7 +92,8 @@ def fetch_top_sci_fi_series():
             'name': series.get('name'),
             'first_air_date': series.get('first_air_date'),
             'popularity': series.get('popularity'),
-            'vote_average': series.get('vote_average')
+            'vote_average': series.get('vote_average'),
+            'idioma': series.get('original_language')
         }
         for series in top_sci_fi_series
     ]
@@ -127,13 +136,13 @@ def main():
         
         # Busca, salvamento, conversão e upload dos dados
         fantasy_movies = fetch_fantasy_movies()
-        save_to_csv(fantasy_movies_csv, fantasy_movies, ['id', 'title', 'release_date', 'popularity', 'vote_average', 'runtime'])
+        save_to_csv(fantasy_movies_csv, fantasy_movies, ['id', 'title', 'release_date', 'popularity', 'vote_average', 'runtime', 'idioma'])
         read_csv_and_save_as_json(fantasy_movies_csv, fantasy_movies_json)
         upload_to_s3(fantasy_movies_json, f'Raw/TMDB/JSON/{today}/fantasy_movies.json')
 
         # Buscar as 10 séries de sci-fi mais bem avaliadas
         sci_fi_series = fetch_top_sci_fi_series()
-        save_to_csv(sci_fi_series_csv, sci_fi_series, ['id', 'name', 'first_air_date', 'popularity', 'vote_average'])
+        save_to_csv(sci_fi_series_csv, sci_fi_series, ['id', 'name', 'first_air_date', 'popularity', 'vote_average', 'idioma'])
         read_csv_and_save_as_json(sci_fi_series_csv, sci_fi_series_json)
         upload_to_s3(sci_fi_series_json, f'Raw/TMDB/JSON/{today}/sci_fi_series.json')
 
