@@ -1,9 +1,7 @@
-import csv
 import json
 import os
-import tempfile
-import boto3
 from datetime import datetime
+import boto3
 from botocore.exceptions import NoCredentialsError
 from tmdbv3api import TMDb, Movie, TV
 
@@ -11,15 +9,12 @@ from tmdbv3api import TMDb, Movie, TV
 tmdb = TMDb()
 tmdb.api_key = 'ce0842a8df0d5d21acf0a8ce237ca4d7'
 
-aws_access_key_id = 'ASIAZI2LF2WK2DIJX7A2'
-aws_secret_access_key = 'gigcizgchSSqeaU4toK2ya+44ISSVP4EvexfE0qq'
-aws_session_token = 'IQoJb3JpZ2luX2VjEKv//////////wEaCXVzLWVhc3QtMSJGMEQCIF32B6CfeIUQ8uhSX7CTmhJ9+qDirJIZ7cVSsK+tawC/AiA2jFeqz/otmcGHZo4QeHwu0ikisfL48xxGfa/h/RJfXyqoAwiz//////////8BEAAaDDYzNzQyMzQ0MTMwMSIMqWTPqHVqvzruYfQkKvwCeGnySlqZ+n9IMa0YwnZjhJlz1bjcRgxK7dgJxRnddVXchQKL49sN+yipa7cvRPsHLKiTJ4UHOiEvFzfqbzCkpdr20+Tl6V0ivNI6E/eA6iw9YWUfQLV9JUEqOHLTdoYIRHcPuzObBhyHzDn0s7ieDL1Q2tuA65WH0WiJc/gilR/osAfZYZxHyFzouR8vzUAhbEUHiY3sGVl6aRkKPdQDU971Tvn4FDa1eEHDcyhcoG2W4zKJitQ6btaAYvhkk3feuEFYbXIw3Fx9CdrEGI5wHqXlVchf8WGNkyx/RnoMdBAYqTmOgKfxjAg7ZKlpaaoNWce5t3jko17oPQEHGgYcWAuckjJoaw/2l674VTALy12/xNB9TI1j6f9ceQQFSwE1nky++zeueJku5CSqD/CV02VBFh6pjFBWc3vedNiB8NvkV762BsUn+SXVha7pZ7K0XGqZWOkqg797NIiszuzwWIxxKdGcyMqliIly1PUzNyn0gQAEm9eB4LvW9KcwjoWltgY6pwGdYL9OqTpfp72+Agm0FhS+yfuGANDtORuAfKWudcyadIjz9fOMjhxP0jisVssM+U8dUR8qbFsILvy5/5HeKUQT3aMgXNWKAYJnrPge8Z1tRGi5ZlRxKWtf1P0su05CRGjQkcK4nFUJCsmM899nQfOzK9/jgfbcpHJBomUwIHsEPu49s9MuHg216ck/rNB3L05UapfvIqLXj1ExS1sV1AIqB5a5hklv8g=='
-
 # Inicialize o boto3 para S3
 s3 = boto3.client('s3',
-    aws_access_key_id=aws_access_key_id,
-    aws_secret_access_key=aws_secret_access_key,
-    aws_session_token=aws_session_token)
+    aws_access_key_id='ASIAZI2LF2WKX2Q7GZ33',
+    aws_secret_access_key='Hzg4Pw8GKwcMaxwn1aP1OyBLr8cmOStjprL0ull9',
+    aws_session_token='IQoJb3JpZ2luX2VjEB4aCXVzLWVhc3QtMSJIMEYCIQCpSbFtJdxAI79haYMtu8IZ6Vc6289vLkiqL0C4w1uYcQIhAOCyhyB789vvL1ckIYqfUVTd5XNuW6l1b1Bb7TX5/NA/Kp8DCDcQABoMNjM3NDIzNDQxMzAxIgx/dMDsO5cv30mdLEMq/AK9gpsCy4BhQlcppNTEgvK2sQDzCvT8pc47ZJfz6QYtHzvBEl5Mh/hqYxxuS1TXka6ISXLN/Y4ey5V9MCHPSO/0II0cISam8ogy+HBJJ+m2+hpiPpfp85DQ1zUBuzZXPyZRUol84xYDiUrVIGmU5ZXLE7xHJf+SrgdISm6apou65oI8CfcayLIuDtCVk7K3sDmolpFhu2sTwyN1fePTNYRqaOxzJI0nYhnNSwTLBjEleEsd6fkmJptdJ67uXRIXEgdOfJimPgihhaiXgY6r56NMehtMnsYPq0061RnTyiBbBBssph8FGS0emp4i03SR74JIuEdrNfaCAGvCII88azsXxLhQ157/DSSBzRcdRb+T7SrNLlJ281/y8SKWHzZTcWp78RqfWerPSWnH8oTEa+XxXU08uP1ggDV8mK6qwwNH3Q6R6Kypdofs7AhUn/SMgnqpmYf0Wo4K9nJPyoER/kM8JC8KTtSJty7EXd1Us1Dq+xT3UfkoGHQwAxBUDjC1r762BjqlAaklq3e4sCVrsnc+iSf2PSQnIDXvcBwk4PEP4qHpojzhiXRISkAl6KFj3VD4j5F7DmAqlYuGzZ/tbvZUhLGc1XfEcjo28M+tzRamdeREeu23u89mSHInj/4i/AoygkKRenmoTWMYSYJ4eFu1Z69M+4u7WRCX8zdUr4BKwrZ/SiBLZleJY7nW2F5En+O/8BaszOfRiKr62OtOd2YktcWh0e5rN0NqIw==')  # Se necessário
+
 bucket_name = 'projeto-pb'
 
 # Obter a data atual
@@ -31,7 +26,7 @@ def fetch_fantasy_movies():
     page = 1
     all_fantasy_movies = []
 
-    while page <= 50:  # Limita a 5 páginas para simplificação
+    while page <= 500:  # Limita a 500 páginas para simplificação
         try:
             response = movie.popular(page=page)
             filtered_movies = [m for m in response.get('results', []) if genre_id in m.get('genre_ids', [])]
@@ -47,7 +42,7 @@ def fetch_fantasy_movies():
     # Pegar os 200 primeiros
     longest_worst_rated_fantasy_movies = all_fantasy_movies[:200]
     
-    # Simplificar dados para CSV
+    # Simplificar dados para JSON
     simplified_movies = [
         {
             'id': movie.get('id'),
@@ -69,7 +64,7 @@ def fetch_top_sci_fi_series():
     page = 1
     all_sci_fi_series = []
 
-    while page <= 50:  # Limita a 5 páginas para simplificação
+    while page <= 500:  # Limita a 500 páginas para simplificação
         try:
             response = tv.popular(page=page)
             filtered_series = [s for s in response.get('results', []) if genre_id in s.get('genre_ids', [])]
@@ -85,7 +80,7 @@ def fetch_top_sci_fi_series():
     # Pegar as 200 séries mais bem avaliadas
     top_sci_fi_series = all_sci_fi_series[:200]
     
-    # Simplificar dados para CSV
+    # Simplificar dados para JSON
     simplified_series = [
         {
             'id': series.get('id'),
@@ -100,20 +95,9 @@ def fetch_top_sci_fi_series():
     
     return simplified_series
 
-def save_to_csv(file_name, data, headers):
-    # Salvar os dados em um arquivo CSV
-    with open(file_name, mode='w', newline='', encoding='utf-8') as file:
-        writer = csv.DictWriter(file, fieldnames=headers)
-        writer.writeheader()
-        writer.writerows(data)
-
-def read_csv_and_save_as_json(csv_file_name, json_file_name):
-    # Ler o arquivo CSV e salvar como JSON
-    with open(csv_file_name, mode='r', encoding='utf-8') as csv_file:
-        reader = csv.DictReader(csv_file)
-        data = [row for row in reader]
-
-    with open(json_file_name, mode='w', encoding='utf-8') as json_file:
+def save_to_json(file_name, data):
+    # Salvar os dados em um arquivo JSON
+    with open(file_name, mode='w', encoding='utf-8') as json_file:
         json.dump(data, json_file, indent=4, ensure_ascii=False)
 
 def upload_to_s3(file_name, s3_path):
@@ -127,24 +111,22 @@ def upload_to_s3(file_name, s3_path):
         print("Credenciais AWS não encontradas.")
 
 def main():
-    # Buscar os filmes de fantasia mais longos e piores avaliados
-    with tempfile.TemporaryDirectory() as temp_dir:
-        fantasy_movies_csv = os.path.join(temp_dir, 'fantasy_movies.csv')
-        fantasy_movies_json = os.path.join(temp_dir, 'fantasy_movies.json')
-        sci_fi_series_csv = os.path.join(temp_dir, 'sci_fi_series.csv')
-        sci_fi_series_json = os.path.join(temp_dir, 'sci_fi_series.json')
-        
-        # Busca, salvamento, conversão e upload dos dados
-        fantasy_movies = fetch_fantasy_movies()
-        save_to_csv(fantasy_movies_csv, fantasy_movies, ['id', 'title', 'release_date', 'popularity', 'vote_average', 'runtime', 'idioma'])
-        read_csv_and_save_as_json(fantasy_movies_csv, fantasy_movies_json)
-        upload_to_s3(fantasy_movies_json, f'Raw/TMDB/JSON/{today}/fantasy_movies.json')
+    # Definir os nomes dos arquivos JSON no diretório atual
+    fantasy_movies_json = 'fantasy_movies.json'
+    sci_fi_series_json = 'sci_fi_series.json'
+    
+    # Busca e salvamento dos dados
+    fantasy_movies = fetch_fantasy_movies()
+    save_to_json(fantasy_movies_json, fantasy_movies)
+    print(f"Filmes de fantasia salvos em '{fantasy_movies_json}'")
 
-        # Buscar as 10 séries de sci-fi mais bem avaliadas
-        sci_fi_series = fetch_top_sci_fi_series()
-        save_to_csv(sci_fi_series_csv, sci_fi_series, ['id', 'name', 'first_air_date', 'popularity', 'vote_average', 'idioma'])
-        read_csv_and_save_as_json(sci_fi_series_csv, sci_fi_series_json)
-        upload_to_s3(sci_fi_series_json, f'Raw/TMDB/JSON/{today}/sci_fi_series.json')
+    sci_fi_series = fetch_top_sci_fi_series()
+    save_to_json(sci_fi_series_json, sci_fi_series)
+    print(f"Séries de ficção científica salvas em '{sci_fi_series_json}'")
+
+    # Upload dos arquivos para o S3
+    upload_to_s3(fantasy_movies_json, f'Raw/TMDB/JSON/{today}/fantasy_movies.json')
+    upload_to_s3(sci_fi_series_json, f'Raw/TMDB/JSON/{today}/sci_fi_series.json')
 
 if __name__ == "__main__":
     main()
