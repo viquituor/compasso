@@ -14,6 +14,7 @@ Estou mergulhado nesta jornada de aprendizado que mescla teoria e prática, expl
 7. [Sprint 7](Sprint%207/README.md)
 8. [Sprint 8](Sprint%208/README.md)
 9. [Sprint 9](Sprint%209/README.md)
+10. [Sprint 10](Sprint%2010/README.md)
 
 ___
 
