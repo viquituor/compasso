@@ -2,3 +2,7 @@
 # DESAFIO FINAL
 
 ## [DESAFIO DA SPRINT 10](/Sprint%209/Desafio/README.md)
+
+# CERTIFICADO DE EXAME DE CLOUD PARCTITIONER
+
+## [CERTIFICADO](/Sprint%2010/Certificados/AWS%20Certified%20Cloud%20Practitioner.pdf)
